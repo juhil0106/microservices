@@ -1,0 +1,162 @@
+{
+  "Routes": [
+    // Product API
+    {
+      "UpstreamPathTemplate": "/api/Product",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "catalog.api",
+          "Port": "80"
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Product"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Product/ById/{id}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "catalog.api",
+          "Port": "80"
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Product/ById/{id}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Product/ByName/{name}",
+      "UpstreamHttpMethod": [ "Get", "Delete" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "catalog.api",
+          "Port": "80"
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Product/ByName/{name}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Product/{categoryName}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "catalog.api",
+          "Port": "80"
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Product/{categoryName}"
+    },
+    // Basket API
+    {
+      "UpstreamPathTemplate": "/api/Basket/{userName}",
+      "UpstreamHttpMethod": [ "Get", "Delete" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "basket.api",
+          "Port": "80"
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Basket/{userName}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Basket",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "basket.api",
+          "Port": "80"
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Basket"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Basket/Checkout",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "basket.api",
+          "Port": "80"
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Basket/Checkout",
+      "RateLimitOptions": {
+        "ClientWhitelist": [],
+        "EnableRateLimiting": true,
+        "Period": "3s",
+        "PeriodTimespan": 1,
+        "Limit": 1
+      }
+    },
+    // Discount API
+    {
+      "UpstreamPathTemplate": "/api/Discount/{productName}",
+      "UpstreamHttpMethod": [ "Get", "Delete" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "discount.api",
+          "Port": "80"
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Discount/{productName}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Discount",
+      "UpstreamHttpMethod": [ "Post", "Put" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "discount.api",
+          "Port": "80"
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Discount"
+    },
+    // Order API
+    {
+      "UpstreamPathTemplate": "/api/Order/{userName}",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "ordering.api",
+          "Port": "80"
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Order/{userName}"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Order",
+      "UpstreamHttpMethod": [ "Post", "Put" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "ordering.api",
+          "Port": "80"
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Order"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Order/{id}",
+      "UpstreamHttpMethod": [ "Delete" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "ordering.api",
+          "Port": "80"
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Order/{id}"
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "oceloteapigw"
+  }
+}

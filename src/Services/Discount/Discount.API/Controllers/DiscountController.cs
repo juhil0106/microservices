@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Discount.API.Controllers
 {
-    [Route("api/[controller]/[action]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class DiscountController : ControllerBase
     {
@@ -15,7 +15,7 @@ namespace Discount.API.Controllers
             _discountRepository = discountRepository;
         }
 
-        [HttpGet]
+        [HttpGet, Route("{productName}")]
         public async Task<IActionResult> GetDiscount(string productName)
         {
             var discount = await _discountRepository.GetDiscount(productName);
@@ -36,7 +36,7 @@ namespace Discount.API.Controllers
             return discount is true ? Ok("Product discount updated successfully.") : BadRequest("Unable to update product discount.");
         }
 
-        [HttpDelete]
+        [HttpDelete, Route("{productName}")]
         public async Task<IActionResult> DeleteDiscount(string productName)
         {
             var discount = await _discountRepository.DeleteCoupon(productName);

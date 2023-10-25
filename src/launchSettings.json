@@ -6,7 +6,10 @@
       "serviceActions": {
         "catalog.api": "StartDebugging",
         "discount.api": "StartDebugging",
-        "discount.grpc": "StartDebugging"
+        "discount.grpc": "StartDebugging",
+        "ordering.api": "StartDebugging",
+        "oceloteapigw": "StartDebugging",
+        "shopping.aggregator": "StartDebugging"
       }
     }
   }
