@@ -25,7 +25,25 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - "postgres_data:/var/lib/postgresql/data"
+      - "postgres_data:/var/lib/postgresql/data" 
+
+  orderdb:
+    container_name: orderdb
+    environment:
+        SA_PASSWORD: "Juhil.BS@123"
+        ACCEPT_EULA: "Y"
+    restart: always
+    ports:
+      - "1433:1433"
+ 
+  rabbitmq:
+    container_name: rabbitmq
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes: 
+      - rabbitmq_data:/var/lib/rabbitmq
 
   pgadmin:
     container_name: pgadmin
@@ -62,6 +80,7 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - "CacheSettings:ConnectionString=basketdb:6379"
       - "GrpcSettings:DiscountUrl=http://discount.grpc"
+      - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672"
     ports:
       - "8001:80"
 
@@ -82,4 +101,33 @@ services:
       - "DatabaseSettings:ConnectionString=Server=discountdb;Port=5432;Database=DiscountDb;User Id=admin;Password=admin@123"
     ports:
       - "8003:80"
+
+
+  ordering.api:
+    container_name: order.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionStrings:DefaultConnection=Server=orderdb;Database=OrderDb;User Id=sa;Password=Juhil.BS@123;MultipleActiveResultSets=True;TrustServerCertificate=True"
+      - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672"
+    ports:
+      - "8004:80"
+        
+
+  oceloteapigw:
+    container_name: ocelotapigateway
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "8010:80"
+
+
+  shopping.aggregator:
+    container_name: shopping.aggregator
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ApiSettings:CatalogUrl=http://catalog.api"
+      - "ApiSettings:BasketUrl=http://basket.api"
+      - "ApiSettings:OrderingUrl=http://ordering.api"
+    ports:
+      - "8005:80"
 
