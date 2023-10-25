@@ -30,7 +30,7 @@ namespace Shopping.Aggregator.Controllers
                 var product = await _catalogService.GetCatalogById(item.ProductId);
 
                 item.Category = product.Category;
-                item.Description = product.Desription;
+                item.Description = product.Description;
                 item.ProductName = product.Name;
                 item.ImageFile = product.ImagePath;
             }

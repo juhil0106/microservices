@@ -8,6 +8,6 @@
         public int AvilableQuantity { get; set; }
         public decimal Price { get; set; }
         public string ImagePath { get; set; } = null!;
-        public string Desription { get; set; } = null!;
+        public string Description { get; set; } = null!;
     }
 }
